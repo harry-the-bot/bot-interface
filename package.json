@@ -1,0 +1,30 @@
+{
+  "name": "bot-interface",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build && npm run run-electron",
+    "run-electron": "node_modules/.bin/electron .",
+    "build": "npm run compile-less",
+    "compile-less": "node_modules/.bin/lessc less/main.less app/css/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harry-the-bot/bot-interface.git"
+  },
+  "author": "Danilo Rechi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harry-the-bot/bot-interface/issues"
+  },
+  "homepage": "https://github.com/harry-the-bot/bot-interface#readme",
+  "dependencies": {
+    "electron": "^1.4.0",
+    "jQuery": "^1.7.4"
+  },
+  "devDependencies": {
+    "less": "^2.7.1"
+  }
+}

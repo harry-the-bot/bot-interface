@@ -96,3 +96,7 @@ body {
   background-color: #662424;
   color: #FFF;
 }
+#videos #bot-cam {
+  width: 100%;
+  heifht: 100%;
+}

@@ -4,6 +4,7 @@ var botInterface = null;
 var loadingScreen = null;
 var userVideo = null;
 var botVideo = null;
+var botVideoStream = null;
 
 function startHarry(params){
     botSocket = params[0];
@@ -11,53 +12,24 @@ function startHarry(params){
     loadingScreen = params[2];
     botInterface = params[3];
     errorScreen = params[4];
+    userVideo = createVideo($('#videos #user-cam'));
+    botVideo = createVideo($('#videos #bot-cam'));
 
-    //Connection attempt
-    botSocket.emit('bot-hello',config.botId);
+    turnBotVideoOn(botVideo);
 
-    //Bot connected successfully and got a room
-    botSocket.on('server-room-created-successfully', () => {
-        loadingScreen.up(100).then( () => {
-            setTimeout( () => {
-                loadingScreen.fadeOut('slow', () => {
-                    botInterface.fadeIn('slow',() => {
-                        manageRoom();
-                    });
-                });
-            },500)
-        });
-
-    })
-
-
-    //There's already some bot using this id
-    botSocket.on('server-cant-create-room', () => {
-        function tryAgain(e){
-
-            e.preventDefault();
-            errorScreen.fadeOut('slow', () => {
-                loadingScreen.fadeIn('slow');
-                setTimeout(() => {
-                    startHarry(params);
-                },1000)
-            });
-        }
-
-        errorScreen.show("Não foi possível criar um link de conversação!",
-                         "Verifique se um robô com este ID já não está conectado ao servidor",
-                         [
-                             {
-                                 text: "Tentar novamente",
-                                 type: "good",
-                                 action: (e) => tryAgain
-                             }
-                        ]);
-    })
 }
 
-function manageRoom(){
-    userVideo = $('#videos #user-cam');
-    botVideo = $('#videos #bot-cam');
+function turnBotVideoOn(videoObject){
 
-    
+    //$('[selector]')[0] returns the same as document.getElementById(...)
+    var obj = videoObject instanceof $ ? videoObject[0] : videoObject;
+
+    navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true
+    }).then( (stream) => {
+        console.log("Got stream",videoObject);
+        obj.src = window.URL.createObjectURL(stream);
+        botVideoStream = stream;
+    })
 }

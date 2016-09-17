@@ -16,5 +16,13 @@ function createLoadingScreen(object){
 
     }
 
+    object.reset = () => {
+
+        var content = object.find('.progress-bar-content')
+
+        content.css('width','0px');
+
+    }
+
     return object;
 }

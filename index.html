@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
         <title> Harry the bot - Bot interface</title>
 
         <link href="./app/css/main.css" rel="stylesheet" />
@@ -27,6 +28,11 @@
                     </div>
                 </div>
             </div>
+
+            <div id="videos">
+                <video id="bot-cam" autoplay muted></video>
+                <video id="user-cam" autoplay></video>
+            </div>
         </div>
 
         <div id="loader">
@@ -41,8 +47,21 @@
             </div>
         </div>
 
+        <div id="load-error">
+            <div class="heading"  title="Erro!"> Erro! </div>
+            <div class="error-name">
+                <span></span>
+            </div>
+            <div class="error-cause">
+                <span></span>
+            </div>
+            <div class="button-holder">
+            </div>
+        </div>
+
         <script>window.$ = window.jQuery = require('jQuery');</script>
         <script src="./app/js/interface/LoadingScreen.js"></script>
+        <script src="./app/js/interface/ErrorScreen.js"></script>
         <script src="./app/js/helpers.js"></script>
         <script src="./app/js/harry.js"></script>
         <script src="./app/js/main.js"></script>

@@ -2,7 +2,7 @@ $(document).ready( ($) => {
 
     var loadingScreen = createLoadingScreen($('#loader'));
     var botInterface = $('#interface');
-
+    var errorScreen = createErrorScreen($('#load-error'),loadingScreen,botInterface);
     function getConfig(){
         return new Promise( (resolve,reject) => {
             resolve({
@@ -28,7 +28,7 @@ $(document).ready( ($) => {
             loadSocketIO(config.serverAddress).then( () => {
                 loadingScreen.up(10);
                 var socket = io(config.serverAddress);
-                resolve([socket,config,loadingScreen,botInterface]);
+                resolve([socket,config,loadingScreen,botInterface,errorScreen]);
             });
         });
 

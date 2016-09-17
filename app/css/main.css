@@ -108,7 +108,7 @@ body {
 }
 #videos #user-cam {
   z-index: 10;
-  background-color: #FF00CC;
+  background-color: #CCC;
   object-fit: cover;
   position: relative;
   width: 100%;

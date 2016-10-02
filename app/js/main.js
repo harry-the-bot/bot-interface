@@ -30,7 +30,7 @@ $(document).ready( ($) => {
             loadSocketIO(config.serverAddress).then( () => {
                 loadingScreen.up(10);
                 var botSocket = io.connect(config.serverAddress);
-                resolve([config,botSocket]);
+                resolve([config,botSocket,loadingScreen,botInterface,errorScreen]);
 
             });
         });
@@ -111,7 +111,6 @@ $(document).ready( ($) => {
         loadingScreen.fadeIn('slow', () => {
             getConfig()
                 .then(bootstrap)
-                .then(connect)
                 .then(startHarry)
         });
 

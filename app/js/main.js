@@ -53,7 +53,6 @@ $(document).ready( ($) => {
     function handleConnectionError(resolve,reject,params){
         //Button event
         function tryAgain(e){
-            alert("try!");
             e.preventDefault();
             errorScreen.fadeOut('slow', () => {
                 loadingScreen.fadeIn('slow');

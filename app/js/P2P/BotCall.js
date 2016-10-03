@@ -146,13 +146,18 @@ BotCall.prototype.startListening = function(){
 
     /*
         If we don't bind "this" to our handlers, our method will understand that
-        their context is "Socket" instead of "BotCall"
+        it's context is "Socket" instead of "BotCall"
     */
     socket.on('server-room-created-successfully', this.handleRoomCreated.bind(this));
     socket.on('server-cant-create-room', this.handleRoomNotCreated.bind(this));
     socket.on('user-joined', this.handleUserJoined.bind(this));
     socket.on('user-answered-offer', this.handleUserAnswered.bind(this));
     socket.on('ice-candidate', this.handleIceCandidate.bind(this));
+    socket.on('move', (direction) => {
+        console.log("Need to move",direction);
+        //maybe should send sync?
+        ipcRenderer.send('move', direction);
+    });
 }
 
 /**

@@ -59,7 +59,10 @@
             </div>
         </div>
 
-        <script>window.$ = window.jQuery = require('jQuery');</script>
+        <script>
+            window.$ = window.jQuery = require('jQuery');
+            var {ipcRenderer} = require('electron');
+        </script>
         <script src="./app/js/interface/LoadingScreen.js"></script>
         <script src="./app/js/interface/ErrorScreen.js"></script>
         <script src="./app/js/interface/Video.js"></script>

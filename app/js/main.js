@@ -87,7 +87,6 @@ $(document).ready( ($) => {
             var failure = handleConnectionError.bind(this,resolve,reject,params);
 
             //Connection attempt
-            botSocket.emit("aaa",'b');
             botSocket.emit('bot-hello',config.botId);
 
             //Register events just once

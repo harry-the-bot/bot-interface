@@ -1,5 +1,6 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
 const BotControls = require('./src/BotControls');
+/*
 const arduinoInterface = require('./src/Arduino');
 
 console.log(arduinoInterface);
@@ -8,9 +9,9 @@ arduinoInterface.setPortName("COM3");
 arduinoInterface.addListener( function(data) {
     console.log("ARDUINO SAID -> " + data);
 })
-//arduinoInterface.start();
+arduinoInterface.start();*/
 
-const botControls = new BotControls(ipcMain,arduinoInterface);
+const botControls = new BotControls(ipcMain,null);
 
 // Avoid garbage collector to close our window. Bad, baad garbage collector ò.ó
 let win;
@@ -43,7 +44,7 @@ app.on('activate', () => {
 })
 
 ipcMain.on('move', (event, direction)=> {
-    console.log("Asing arduino to move",direction);
-    botControls.move(direction.direction,direction.speed);
+    console.log("Asking arduino to move",direction);
+    //botControls.move(direction.direction,direction.speed);
 
 });

@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/harry-the-bot/bot-interface#readme",
   "dependencies": {
-    "electron": "^1.4.0",
+    "electron": "^1.4.2",
+    "electron-rebuild": "^1.2.1",
     "jQuery": "^1.7.4",
     "serialport": "^4.0.1"
   },

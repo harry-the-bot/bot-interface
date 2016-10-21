@@ -25,11 +25,35 @@ function startHarry(params){
             });
         },500)
     });
-
+    enumerateDevices();
 
 
 }
 
+function enumerateDevices(stream) {
+    MediaStreamTrack.getSources(function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var label;
+            if (data[i].kind === "audio") {
+                label = data[i].label.length > 0 ? data[i].label : "Audio Device";
+                $("#audio-devices").append($("<option>", { value: data[i].id }).text(label));
+            }
+        }
+    });
+}
+
+function askForAudioInput(){
+    return new Promise( (resolve,reject) => {
+        $('#config').fadeIn('fast');
+        $('#selected-audio').on('click', (e) => {
+            e.preventDefault();
+            $('#config').fadeOut('fast');
+            var ddlAudio = $("#audio-devices").get(0);
+            var selected = ddlAudio.options[ddlAudio.selectedIndex].value;
+            resolve(selected);
+        })
+    })
+}
 
 function go(){
     var call = new BotCall();
@@ -38,10 +62,14 @@ function go(){
     call.setLocalVideo(document.getElementById('bot-cam'));
     call.setBotId(1);
     var prepareSucceed = botVideoIsEnabled.bind(this,call);
-    call.prepare()
-        .then( prepareSucceed , () => {
-            console.log("nop");
-        });
+    askForAudioInput()
+        .then( (audioDevice) => {
+            console.log("Audio device is " + audioDevice)
+            call.prepare(audioDevice)
+                .then( prepareSucceed , () => {
+                    console.log("nop");
+                });
+        })
 }
 function botVideoIsEnabled(call){
     console.info("Video is enabled");

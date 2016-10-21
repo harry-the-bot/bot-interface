@@ -222,6 +222,15 @@ body {
   background-color: #662424;
   color: #FFF;
 }
+#config {
+  display: none;
+  top: 0;
+  position: absolute;
+  background-color: #CCC;
+  width: 100%;
+  z-index: 999;
+  height: 100%;
+}
 #videos #bot-cam {
   position: fixed;
   width: 200px;

@@ -51,16 +51,24 @@ function Call(){
     }
 }
 
-Call.prototype.getUserMedia = function() {
+Call.prototype.getUserMedia = function(audioDevice) {
+    if(typeof audioDevice === 'undefined')
+        var audioConstraint = true;
+    else
+        var audioConstraint = {
+            optional: [{sourceId:audioDevice}]
+        }
+
+    console.log(audioDevice,audioConstraint);
     return navigator.mediaDevices.getUserMedia({
-        audio: true,
+        audio: audioConstraint,
         video: true
     })
 }
 
-Call.prototype.prepare = function() {
+Call.prototype.prepare = function(audioDevice) {
     return new Promise( (resolve,reject) => {
-        this.getUserMedia()
+        this.getUserMedia(audioDevice)
             .then( (stream) => {
                 this.getLocalVideo().src = window.URL.createObjectURL(stream);
                 this.setLocalStream(stream);

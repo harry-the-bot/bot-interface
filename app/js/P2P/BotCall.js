@@ -1,7 +1,8 @@
-function BotCall(){
+function BotCall(_config){
 
     var botId;
     var peerConnection;
+    var config = _config;
 
     this.setBotId = function(_botId){
         botId = _botId;
@@ -17,7 +18,8 @@ function BotCall(){
     }
 
     this.createPeerConnection = function(){
-        peerConnection = new RTCPeerConnection(null);
+        console.log("config is", config);
+        peerConnection = new RTCPeerConnection(config);
         peerConnection.onicecandidate = handleIceCandidate.bind(this);
         peerConnection.onaddstream = handleRemoteStreamAdded.bind(this);
         peerConnection.onremovestream = handleRemoteStreamRemoved.bind(this);

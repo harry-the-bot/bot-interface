@@ -58,7 +58,8 @@ function BotCall(){
       *            PeerConnection.createOfffer Handlers
       ************************************************************************/
     function emitSessionDescription(sessionDescription){
-        console.info("Emitting session description", sessionDescription)
+        console.info("Emitting session description", sessionDescription);
+        sessionDescription.sdp = preferOpus(sessionDescription.sdp);
         this.getPeerConnection().setLocalDescription(sessionDescription);
         this.getSocket().emit('bot-created-offer',sessionDescription);
     }
